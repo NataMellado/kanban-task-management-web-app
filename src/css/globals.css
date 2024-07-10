@@ -9,3 +9,24 @@
     text-wrap: balance;
   }
 } */
+
+li {
+  list-style: none;
+}
+
+
+.filter-white {
+  filter: invert(100%) brightness(1000%);
+}
+
+.filter-mode {
+  filter: invert(56%) sepia(13%) saturate(469%) hue-rotate(177deg) brightness(98%) contrast(92%);
+}
+
+.sidebarBtnEye:focus {
+  outline: none;
+}
+
+.closed .sidebar {
+  display: none;
+}

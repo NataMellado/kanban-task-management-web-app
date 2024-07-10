@@ -10,7 +10,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      color: {
+      colors: {
         black: "#000112",
         veryDarkGrey: "#20212C",
         darkGrey: "#2B2C37",
@@ -32,11 +32,20 @@ const config: Config = {
         "bodyL": "13px",
         "bodyM": "12px",
       },
-      letterSpacing: {
-        "headingS": "2.4px",
+      letterSpacing: { 
+        "headingS": "2.4px", //tracking-headingS
       },
       lineHeight: {
-        "bodyL": "23px",
+        "bodyL": "23px", //leading-bodyL
+      },
+      spacing: {
+        4.5: "1.125rem",
+        5.5: "1.375rem",
+        6.5: "1.625rem",
+        7.5: "1.875rem",
+        8.5: "2.125rem",
+        9.5: "2.375rem",
+        10.5: "2.625rem",
       },
     },
   },

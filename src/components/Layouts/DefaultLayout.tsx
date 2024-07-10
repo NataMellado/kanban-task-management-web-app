@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, ReactNode } from "react";
 import Sidebar from "../Sidebar/Sidebar";
+import Header from "../Header/Header";
 
 import { redirect } from "next/navigation";
 
@@ -14,17 +15,17 @@ export default function DefaultLayout({
   return (
     <>
       {/* <!-- ===== Page Wrapper Star ===== --> */}
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex h-screen overflow-hidden bg-lightGrey dark:bg-veryDarkGrey">
         {/* <!-- ===== Sidebar Star ===== --> */}
         <Sidebar
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
         />
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Star ===== --> */}
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           {/* <!-- ===== Header Star ===== --> */}
+          <Header
+          />
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Star ===== --> */}
