@@ -2,7 +2,7 @@ import { redirect } from "next/dist/server/api-utils";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: 'class', 
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -25,18 +25,18 @@ const config: Config = {
         redHover: "#FF9898",
       },
       fontSize: {
-        "headingXL": "24px",
-        "headingL": "18px",
-        "headingM": "15px",
-        "headingS": "12px",
-        "bodyL": "13px",
-        "bodyM": "12px",
+        headingXL: "24px",
+        headingL: "18px",
+        headingM: "15px",
+        headingS: "12px",
+        bodyL: "13px",
+        bodyM: "12px",
       },
-      letterSpacing: { 
-        "headingS": "2.4px", //tracking-headingS
+      letterSpacing: {
+        headingS: "2.4px", //tracking-headingS
       },
       lineHeight: {
-        "bodyL": "23px", //leading-bodyL
+        bodyL: "23px", //leading-bodyL
       },
       spacing: {
         4.5: "1.125rem",
@@ -46,7 +46,11 @@ const config: Config = {
         8.5: "2.125rem",
         9.5: "2.375rem",
         10.5: "2.625rem",
+        72.5: "18.125rem",
       },
+      transitionProperty: {
+        width: "width"
+      }
     },
   },
   plugins: [],

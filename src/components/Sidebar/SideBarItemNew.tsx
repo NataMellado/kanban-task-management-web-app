@@ -12,9 +12,16 @@ const SidebarItemNew = () => {
             height={16}
             src={"/img/icon-board.svg"}
             alt=""
-            style={{ width: "auto", height: "auto", filter: "invert(41%) sepia(63%) saturate(580%) hue-rotate(203deg) brightness(87%) contrast(92%)" }}
+            style={{
+              width: "auto",
+              height: "auto",
+              filter:
+                "invert(41%) sepia(63%) saturate(580%) hue-rotate(203deg) brightness(87%) contrast(92%)",
+            }}
           />
-          + Crear nuevo tablero
+          <div className="max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
+            + Crear nuevo tablero
+          </div>
         </div>
       </Link>
     </li>

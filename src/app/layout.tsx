@@ -1,24 +1,29 @@
-import type { Metadata } from "next";
+"use client";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import React, { useEffect, useState } from "react";
+import Loader from "../components/Loader/Loader";
 import "../css/globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Frontend Mentor | Kanban Task Manager Web App",
-  description: "Kanban Task Manager web app built with Next.js",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [loading, setLoading] = useState<boolean>(true);
+ 
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1000);
+  }, []);
+
   return (
     <html lang="en">
-      <body className={plusJakartaSans.className}>
-        {children}
+      <body suppressHydrationWarning={true} className={plusJakartaSans.className}>
+        {loading? <Loader /> : children}
       </body>
     </html>
   );
 }
+

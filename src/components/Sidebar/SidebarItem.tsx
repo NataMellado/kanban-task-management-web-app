@@ -17,7 +17,8 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
       <Link
         href={item.route}
         onClick={handleClick}
-        className={`${
+        className={`
+        ${
           isActive
             ? "bg-primary/[.07] text-primary dark:bg-white/10 dark:text-white"
             : "text-mediumGrey"
@@ -31,13 +32,18 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
           height={16}
           src={"/img/icon-board.svg"}
           alt=""
-          style={{ 
-            width: "auto", height: "auto",
+          style={{
+            width: "auto",
+            height: "auto",
             fill: "#828FA3",
-            filter: isHovered ? "invert(52%) sepia(46%) saturate(6417%) hue-rotate(223deg) brightness(83%) contrast(85%)" : "invert(58%) sepia(7%) saturate(886%) hue-rotate(177deg) brightness(95%) contrast(95%)",
-           }}
+            filter: isHovered
+              ? "invert(52%) sepia(46%) saturate(6417%) hue-rotate(223deg) brightness(83%) contrast(85%)"
+              : "invert(58%) sepia(7%) saturate(886%) hue-rotate(177deg) brightness(95%) contrast(95%)",
+          }}
         />
-        {item.label}
+        <div className="max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
+          {item.label}
+        </div>
       </Link>
     </li>
   );
