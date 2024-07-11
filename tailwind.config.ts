@@ -21,6 +21,7 @@ const config: Config = {
         white: "#FFFFFF",
         mainPurple: "#635FC7",
         mainPurpleHover: "#A8A4FF",
+        lightPurple: "#635FC71A",
         red: "#EA5555",
         redHover: "#FF9898",
       },

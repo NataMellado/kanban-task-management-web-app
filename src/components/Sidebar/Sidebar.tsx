@@ -6,21 +6,26 @@ import Image from "next/image";
 import SidebarItem from "@/components/Sidebar/SidebarItem";
 import SidebarItemNew from "@/components/Sidebar/SideBarItemNew";
 import useSidebarMode from "@/hooks/useSidebar";
+import useInitialData from "@/hooks/useData";
 
-const menuGroups = [
-  {
-    name: "TABLEROS",
-    menuItems: [
-      { label: "Lanzamiento Kanban", route: "#" },
-      { label: "Curso Javascript", route: "#" },
-      { label: "Roadmap", route: "#" },
-    ],
-  },
-];
 
 const Sidebar = () => {
   const [sidebarMode, setSidebarMode] = useSidebarMode();
   const pathname = usePathname();
+  const [boardData] = useInitialData();
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  
+const menuGroups = [
+  {
+    name: `TABLEROS (${boardData.length})`,
+    menuItems: boardData.map((board) => ({
+      label: board.name,
+      route: "#",
+    })),
+  },
+];
+
   
   return (
     <div className="relative h-screen flex">
@@ -36,7 +41,7 @@ const Sidebar = () => {
           <nav className="mt-1">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
-                <h3 className="mb-[19px] text-headingS px-[32px] tracking-headingS font-bold text-mediumGrey">
+                <h3 className="mb-[19px] text-nowrap text-headingS px-[32px] tracking-headingS font-bold text-mediumGrey">
                   {group.name}
                 </h3>
 
@@ -45,9 +50,10 @@ const Sidebar = () => {
                     <SidebarItem
                       key={menuIndex}
                       item={menuItem}
+                      boardName={menuItem.label}
                     />
                   ))}
-                  <SidebarItemNew />
+                  <SidebarItemNew modalOpen={modalOpen} setModalOpen={setModalOpen} />
                 </ul>
               </div>
             ))}
@@ -56,7 +62,7 @@ const Sidebar = () => {
       </aside>
 
       {/* <!-- Botón de alternancia del sidebar --> */}
-      <div className="fixed z-50 bottom-0 pb-4">
+      <div className="fixed z-40 bottom-0 pb-4">
         <button
           className="bg-mainPurple rounded-tr-[2rem] rounded-br-[2rem] hover:bg-mainPurpleHover h-[3rem] w-[3rem] flex items-center justify-center"
           onClick={() => {

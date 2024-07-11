@@ -2,28 +2,31 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const SidebarItem = ({ item, pageName, setPageName }: any) => {
-  const [isHovered, setIsHovered] = React.useState(false);
-  const handleClick = () => {
-    const updatedPageName =
-      pageName !== item.label.toLowerCase() ? item.label.toLowerCase() : "";
-    return setPageName(updatedPageName);
+interface Props {
+  item: {
+    label: string;
+    route: string;
   };
+  boardName: string;
+}
 
-  const isActive = pageName === item.route;
+const SidebarItem: React.FC<Props> = ({ item, boardName }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const isActive = false;
 
   return (
     <li>
       <Link
         href={item.route}
-        onClick={handleClick}
+
         className={`
-        ${
-          isActive
-            ? "bg-primary/[.07] text-primary dark:bg-white/10 dark:text-white"
-            : "text-mediumGrey"
-        } group relative flex items-center gap-3 rounded-tr-[32px] rounded-br-[32px] mr-[24px] px-[24px] py-[15px] font-bold text-headingM duration-300 ease-in-out
-        hover:bg-lightGrey hover:text-mainPurple`}
+          ${
+            isActive
+              ? "bg-primary/[.07] text-primary dark:bg-white/10 dark:text-white"
+              : "text-mediumGrey"
+          } group relative flex items-center gap-3 rounded-tr-[32px] rounded-br-[32px] mr-[24px] px-[24px] py-[15px] font-bold text-headingM duration-300 ease-in-out
+          hover:bg-lightGrey hover:text-mainPurple`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
