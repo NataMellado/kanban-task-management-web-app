@@ -6,27 +6,34 @@ import Image from "next/image";
 import SidebarItem from "@/components/Sidebar/SidebarItem";
 import SidebarItemNew from "@/components/Sidebar/SideBarItemNew";
 import useSidebarMode from "@/hooks/useSidebar";
-import useInitialData from "@/hooks/useData";
+import useData from "@/hooks/useData";
 
+interface MenuItem {
+  label: string;
+  route: string;
+}
+
+interface MenuGroup {
+  name: string;
+  menuItems: MenuItem[];
+}
 
 const Sidebar = () => {
   const [sidebarMode, setSidebarMode] = useSidebarMode();
   const pathname = usePathname();
-  const [boardData] = useInitialData();
+  const { boardData, setBoardData } = useData();
   const [modalOpen, setModalOpen] = React.useState(false);
 
-  
-const menuGroups = [
-  {
-    name: `TABLEROS (${boardData.length})`,
-    menuItems: boardData.map((board) => ({
-      label: board.name,
-      route: "#",
-    })),
-  },
-];
+  const menuGroups = [
+    {
+      name: "Tableros",
+      menuItems: boardData.map((board) => ({
+        label: board.name,
+        route: "#",
+      })),
+    },
+  ];
 
-  
   return (
     <div className="relative h-screen flex">
       <aside

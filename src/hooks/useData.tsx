@@ -1,60 +1,45 @@
 import { useEffect, useState } from "react";
-import useLocalStorage from "./useLocalStorage";
+import { Board } from "@/types/Board";
 
-interface Subtask {
-  title: string;
-  isCompleted: boolean;
-}
-
-enum TaskStatus {
-  Todo = "Todo",
-  Doing = "Doing",
-  Done = "Done"
-}
-
-interface Task {
-  title: string;
-  description: string;
-  status: TaskStatus;
-  subtasks: Subtask[];
-}
-
-interface Column {
-  name: string;
-  tasks: Task[];
-}
-
-interface Board {
-  name: string;
-  columns: Column[];
-}
-
-const useInitialData = () => {
+const useData = () => {
+  const [boardData, setBoardData] = useState<Board[]>([]);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
-  const [boardData, setBoardData] = useLocalStorage<Board[]>("boards", []);
+
+  const addBoard = (newBoard: Board) => {
+    const newBoardData = [...boardData, newBoard];
+    localStorage.setItem("boards", JSON.stringify(newBoardData));
+  };
 
   useEffect(() => {
-    if (!initialDataLoaded) {
-      fetchData();
-    }
-  }, [initialDataLoaded]);
-
     const fetchData = async () => {
       try {
         const response = await fetch("/data/data.json");
+        if (!response.ok) {
+          throw new Error("Error al cargar los datos iniciales");
+        }
         const data = await response.json();
         setBoardData(data.boards);
+        localStorage.setItem("boards", JSON.stringify(data.boards));
         setInitialDataLoaded(true);
       } catch (error) {
         console.error("Error al cargar los datos iniciales:", error);
       }
-    };
+    }; 
+  
+    const dataLocalStorage = localStorage.getItem("boards");
+    if (!dataLocalStorage) {
+      fetchData();
+    } else {
+      setInitialDataLoaded(true);
+    }
+  }, [initialDataLoaded]);
 
-    const addBoard = (newBoard: Board) => {
-      setBoardData([...boardData, newBoard]);
-    };
+  useEffect(() => {
+    setBoardData(JSON.parse(localStorage.getItem("boards") || "[]"));
+  }, [localStorage.getItem("boards")]);
 
-  return [boardData, setBoardData, addBoard] as const;
+
+  return { boardData, setBoardData, addBoard };
 };
 
-export default useInitialData;
+export default useData;

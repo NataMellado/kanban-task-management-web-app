@@ -1,17 +1,36 @@
-import React from "react";
+"use client";
+import React, {useState, FormEvent} from "react";
 import Image from "next/image";
 import ClickOutside from "../ClickOutside/ClickOutside";
+import useData from "@/hooks/useData";
 
 interface Props {
   onClose: () => void;
 }
 
 const NewBoardModal = ({ onClose }: Props) => {
+  const [boardName, setBoardName] = useState("");
+  const { addBoard } = useData();
+  
+  const handleSubmit =  (e: FormEvent) => {
+    e.preventDefault();
+    const newBoard = {
+      id: Date.now().toString(),
+      name: boardName,
+      columns: []
+    };
+    addBoard(newBoard);
+    onClose();
+  };
+  
 
   return (
     <div className="fixed w-full items-center justify-center top-0 left-0 right-0 bottom-0 flex z-50 bg-black bg-opacity-50">
       <ClickOutside className="flex w-full max-w-[30rem]" onClick={onClose}>
-      <form className="flex flex-col w-full bg-white rounded-md p-[2rem] shadow-xl dark:bg-darkGrey dark:text-white">
+
+      <form 
+      onSubmit={handleSubmit}
+        className="flex flex-col w-full bg-white rounded-md p-[2rem] shadow-xl dark:bg-darkGrey dark:text-white">
         <h1 className="text-headingL mb-[24px] font-bold">Nuevo tablero</h1>
 
         <label
@@ -25,6 +44,8 @@ const NewBoardModal = ({ onClose }: Props) => {
           type="text"
           placeholder="Board name"
           id="boardName"
+          value={boardName}
+          onChange={(e) => setBoardName(e.target.value)}
         />
 
         <label
@@ -65,7 +86,7 @@ const NewBoardModal = ({ onClose }: Props) => {
         </button>
 
         <button 
-          onClick={(e) => e.preventDefault()}
+          type="submit"
           className="px-[16px] py-[8px] rounded-[2rem] bg-mainPurple text-white text-headingM font-bold ">
           Crear tablero
         </button>
