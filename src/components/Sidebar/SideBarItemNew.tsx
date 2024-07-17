@@ -8,8 +8,6 @@ interface SidebarItemNewProps {
   setModalOpen: (arg0: boolean) => void;
 }
 
-
-
 const SidebarItemNew: React.FC<SidebarItemNewProps> = (props) => {
   return (
     <>
@@ -32,7 +30,7 @@ const SidebarItemNew: React.FC<SidebarItemNewProps> = (props) => {
               }}
             />
             <div className="max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
-              + Crear nuevo tablero
+              + Nuevo tablero
             </div>
           </div>
         </div>

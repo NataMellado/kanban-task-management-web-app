@@ -2,10 +2,10 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader/Loader";
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import "../css/globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] });
-
 
 export default function RootLayout({
   children,
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={plusJakartaSans.className}>
-        {loading? <Loader /> : children}
+        {loading? <Loader /> : <DefaultLayout>{children}</DefaultLayout>}
       </body>
     </html>
   );

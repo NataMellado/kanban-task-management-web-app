@@ -17,6 +17,7 @@ const config: Config = {
         linesDark: "#3E3F4E",
         linesLight: "#E4EBFA",
         mediumGrey: "#828FA3",
+        mediumGrey2: "#828FA31A",
         lightGrey: "#F4F7FD",
         white: "#FFFFFF",
         mainPurple: "#635FC7",
@@ -47,7 +48,7 @@ const config: Config = {
         8.5: "2.125rem",
         9.5: "2.375rem",
         10.5: "2.625rem",
-        72.5: "18.125rem",
+        72.5: "16rem",
       },
       transitionProperty: {
         width: "width"

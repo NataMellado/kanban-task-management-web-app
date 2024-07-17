@@ -4,11 +4,17 @@ import Dropdown from "./Dropdown";
 import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher";
 import Link from "next/link";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import useData from "@/hooks/useData";
 
 const Header = () => {
+  const { boardId } = useParams() as { boardId: string };
+  const { getBoard } = useData();
+  const board = getBoard(boardId);
 
   return (
-    <header className={`sticky top-0 z-10 flex items-center w-full bg-white dark:bg-darkGrey`}>
+    <header 
+      className={`sticky top-0 z-10 flex items-center w-full bg-white dark:bg-darkGrey`}>
 
     <div className={`header-logo flex items-center w-72.5 px-[2rem] h-[5rem] border-r border-linesLight dark:border-linesDark`}>
         <Link href="/">
@@ -35,7 +41,7 @@ const Header = () => {
 
     <div className={`flex flex-1 items-center px-[2rem] h-[5rem] gap-[2rem] border-b border-linesLight dark:border-linesDark`}>
       <span className="text-headingXL font-bold text-black dark:text-white ">
-        Lanzamiento de plataforma
+        {board?.name}
       </span>
       <div className="flex items-center gap-[2rem] ml-auto">
         <DarkModeSwitcher />

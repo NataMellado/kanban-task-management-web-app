@@ -1,4 +1,3 @@
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import React from "react";
 import { Metadata } from "next";
 
@@ -10,9 +9,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <>
-      <DefaultLayout>
         <h1>Home</h1>
-      </DefaultLayout>
     </>
   );
 }
