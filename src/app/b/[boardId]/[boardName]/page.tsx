@@ -2,7 +2,7 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import useData from "@/hooks/useData";
-import Column from "@/components/Cards/column";
+import ColumnCard from "@/components/Cards/column";
 
 const BoardPage = () => {
   const { boardId } = useParams() as { boardId: string };
@@ -18,9 +18,9 @@ const BoardPage = () => {
           </div>
         ) : (
           board?.columns.map((column) => (
-            <Column
+            <ColumnCard
               key={column.id} 
-              column={column} 
+              column={column}
             />
           )
         )

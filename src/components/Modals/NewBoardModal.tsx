@@ -32,8 +32,7 @@ const NewBoardModal = ({ onClose }: Props) => {
   };
 
   const addColumns = () => {
-    const idColumn = Date.now().toString();
-    const newColumn = { id: idColumn, name: "", tasks: [] };
+    const newColumn = { id: uuidv4() , name: "", tasks: [] };
     setColumns([...columns, newColumn]);
   };
 
