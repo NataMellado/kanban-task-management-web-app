@@ -1,8 +1,8 @@
-// src/app/[boardName]/page.tsx
 "use client";
 import React from "react";
 import { useParams } from "next/navigation";
 import useData from "@/hooks/useData";
+import Column from "@/components/Cards/column";
 
 const BoardPage = () => {
   const { boardId } = useParams() as { boardId: string };
@@ -11,24 +11,20 @@ const BoardPage = () => {
   
 
   return (
-      <div>
-        <h1>Tablero: {board?.name}</h1>
-        
-        <div>
-          <h2>Columnas</h2>
-          {board?.columns.map((column) => (
-            <div key={column.id}>
-              <h3>{column.name}</h3>
-              <ul>
-                {column.tasks.map((task) => (
-                  <li key={task.id}>{task.title}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-
+      <div className="flex flex-1 p-6 gap-6">
+        {board?.columns.length === 0 ? (
+          <div className="flex flex-1 items-center justify-center">
+            <h1 className="text-center text-headingL font-bold text-mediumGrey">Este tablero está vacío. Crea una columna para empezar.</h1>
+          </div>
+        ) : (
+          board?.columns.map((column) => (
+            <Column
+              key={column.id} 
+              column={column} 
+            />
+          )
+        )
+        )}
       </div>
   );
 };

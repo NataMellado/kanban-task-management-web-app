@@ -37,7 +37,8 @@ li {
 
 /* Ancho del scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 /* Fondo de la pista del scrollbar */
@@ -51,17 +52,7 @@ li {
 
 /* Color y estilo del thumb (barra de desplazamiento) */
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #828fa348;
+  background-color: #6471858e;
   border-radius: 4px;
 }
 
-.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color:  #6471858e;
-  border-radius: 4px; 
-}
-
-
-/* Opcional: Cambios al hover del thumb */
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
-}

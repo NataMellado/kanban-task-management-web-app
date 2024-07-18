@@ -49,6 +49,7 @@ const config: Config = {
         9.5: "2.375rem",
         10.5: "2.625rem",
         72.5: "16rem",
+        70: "17.5rem",
       },
       transitionProperty: {
         width: "width"

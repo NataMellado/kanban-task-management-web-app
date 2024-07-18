@@ -16,10 +16,8 @@ export default function DefaultLayout({
         <Header />
         <div className="relative flex flex-1">
           <Sidebar />
-          <main>
-            <div className={`mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10`}>
+          <main className={`flex flex-1 overflow-x-auto custom-scrollbar `}>
               {children}
-            </div>
           </main>
         </div>
       </div>

@@ -50,8 +50,7 @@ const Sidebar = () => {
                     <SidebarItem
                       key={menuIndex}
                       item={menuItem}
-                      boardName={menuItem.label}
-                      
+                      boardName={menuItem.label}       
                     />
                   ))}
                 </ul>

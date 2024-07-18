@@ -3,6 +3,7 @@ import React, {useState, FormEvent} from "react";
 import Image from "next/image";
 import ClickOutside from "../ClickOutside/ClickOutside";
 import useData from "@/hooks/useData";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   onClose: () => void;
@@ -10,7 +11,7 @@ interface Props {
 
 const NewBoardModal = ({ onClose }: Props) => {
   const [boardName, setBoardName] = useState("");
-  const [columns, setColumns] = useState([{ id: "", name: "", tasks: [] }]);
+  const [columns, setColumns] = useState([{ id: uuidv4(), name: "", tasks: [] }]);
   const { addBoard } = useData();
   
   const handleSubmit =  (e: FormEvent) => {

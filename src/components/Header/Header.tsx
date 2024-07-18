@@ -39,8 +39,8 @@ const Header = () => {
         </Link>
       </div>
 
-    <div className={`flex flex-1 items-center px-[2rem] h-[5rem] gap-[2rem] border-b border-linesLight dark:border-linesDark`}>
-      <span className="text-headingXL font-bold text-black dark:text-white ">
+    <div className={`flex flex-1 items-center px-[2rem] h-[5rem] gap-[2rem] border-b border-linesLight dark:border-linesDark max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap`}>
+      <span className="text-headingXL font-bold text-black dark:text-white max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
         {board?.name}
       </span>
       <div className="flex items-center gap-[2rem] ml-auto">

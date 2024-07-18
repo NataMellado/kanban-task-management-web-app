@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Board } from "@/types/Board";
 
-
 const useData = () => {
   const [boardData, setBoardData] = useState<Board[]>([]);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
@@ -42,7 +41,6 @@ const useData = () => {
 
   useEffect(() => {
     setBoardData(JSON.parse(localStorage.getItem("boards") || "[]"));
-    console.log("boards", boardData);
   }, [localStorage.getItem("boards")]);
 
 
