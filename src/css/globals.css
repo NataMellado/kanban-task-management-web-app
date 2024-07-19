@@ -35,24 +35,8 @@ li {
   border-bottom: 1px solid #E4EBFA;
 }
 
-/* Ancho del scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #6471858e #f1f1f1;
+  
 }
-
-/* Fondo de la pista del scrollbar */
-.custom-scrollbar::-webkit-scrollbar-track {
-  background-color: #f1f1f1; 
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-track {
-  background-color: #534f5c41; 
-}
-
-/* Color y estilo del thumb (barra de desplazamiento) */
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #6471858e;
-  border-radius: 4px;
-}
-

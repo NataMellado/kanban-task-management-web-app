@@ -29,19 +29,19 @@ const Sidebar = () => {
   return (
     <div className="relative flex overflow-hidden">
       <aside
-        className={`sidebar flex flex-col border-r border-linesLight bg-white transition-width duration-200 ease-linear
+        className={`sidebar flex flex-col border-r border-linesLight bg-white transition-width duration-200 ease-in-out
           dark:border-linesDark dark:bg-darkGrey
           ${sidebarMode === "closed" ? "w-0" : "w-72.5"}
         `}
       >
 
         {/* <!-- Menú del sidebar --> */}
-        <div className="flex flex-col duration-300 ease-linear">
+        <div className="flex flex-col">
           <nav >
             {menuGroups.map((group, groupIndex) => (
             <div key={groupIndex}>
 
-                <h3 className="mb-[19px] text-nowrap text-headingS px-[32px] tracking-headingS font-bold text-mediumGrey">
+                <h3 className="mb-[19px] pt-3 text-nowrap text-headingS px-[32px] tracking-headingS font-bold text-mediumGrey">
                   {group.name}
                 </h3>
 

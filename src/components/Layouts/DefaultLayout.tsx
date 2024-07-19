@@ -12,11 +12,11 @@ export default function DefaultLayout({
 }) {
   return (
     <>
-      <div className="relative flex flex-col h-dvh overflow-hidden bg-lightGrey dark:bg-veryDarkGrey">
+      <div className="relative flex overflow-hidden flex-col h-dvh bg-lightGrey dark:bg-veryDarkGrey">
         <Header />
-        <div className="relative flex flex-1">
+        <div className="flex flex-1">
           <Sidebar />
-          <main className={`flex flex-1 overflow-x-auto custom-scrollbar `}>
+          <main className={`flex flex-1 overflow-x-auto`}>
               {children}
           </main>
         </div>

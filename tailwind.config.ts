@@ -28,8 +28,10 @@ const config: Config = {
       },
       fontSize: {
         headingXL: "24px",
+        headingL2: "21px",
         headingL: "18px",
         headingM: "15px",
+        headingSM: "13px",
         headingS: "12px",
         bodyL: "13px",
         bodyM: "12px",
@@ -53,6 +55,9 @@ const config: Config = {
       },
       transitionProperty: {
         width: "width"
+      },
+      zIndex: {
+        '100': '100',
       }
     },
   },

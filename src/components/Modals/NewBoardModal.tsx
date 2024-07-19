@@ -11,8 +11,12 @@ interface Props {
 
 const NewBoardModal = ({ onClose }: Props) => {
   const [boardName, setBoardName] = useState("");
-  const [columns, setColumns] = useState([{ id: uuidv4(), name: "", tasks: [] }]);
   const { addBoard } = useData();
+
+  const [columns, setColumns] = useState([
+    { id: uuidv4(), name: "Por hacer", tasks: [] },
+    { id: uuidv4(), name: "En curso", tasks: [] }  
+  ]);
   
   const handleSubmit =  (e: FormEvent) => {
     e.preventDefault();
@@ -40,8 +44,6 @@ const NewBoardModal = ({ onClose }: Props) => {
     const newColumns = columns.filter((_, colIndex) => colIndex !== index);
     setColumns(newColumns);
   };
-
-
   
 
   return (
@@ -51,7 +53,8 @@ const NewBoardModal = ({ onClose }: Props) => {
       <form 
         onSubmit={handleSubmit}
         style={{ maxHeight: 'calc(100vh - 100px)' }}
-        className="flex flex-col w-full bg-white rounded-md p-[2rem] shadow-xl dark:bg-darkGrey dark:text-white">
+        className="overflow-hidden flex flex-col max-h-full w-full p-6 bg-white rounded-md shadow-xl dark:bg-darkGrey dark:text-white">
+        
         <h1 className="text-headingL mb-[24px] font-bold">Nuevo tablero</h1>
 
         <label
@@ -69,35 +72,36 @@ const NewBoardModal = ({ onClose }: Props) => {
           onChange={(e) => setBoardName(e.target.value)}
         />
 
-        <div className="flex flex-col overflow-y-auto custom-scrollbar ">
+        <div className="flex flex-col overflow-hidden">
           <label
-            className="text-mediumGrey dark:text-w text-bodyL font-bold mb-[8px] dark:text-white"
+            className="text-mediumGrey text-bodyL font-bold mb-[8px] dark:text-white"
             htmlFor="boardName"
           >
             Columnas
           </label>
-          {columns.map((column, index) => (
-            <div 
-              key={index} 
-              className="flex mb-[0.75rem] gap-4 "
-            >
-              <input
-                className="flex-1 border-2 rounded-md px-[16px] py-[8px] dark:border-linesDark dark:bg-darkGrey text-bodyL leading-bodyL"
-                type="text"
-                placeholder="Por hacer"
-                value={column.name}
-                onChange={(e) => handleColumnChange(index, e.target.value)}
-              />
-              <button 
-                onClick={(e) => {e.preventDefault(); removeColumn(index)}}>
-                <Image width={20} height={20} src={"/img/icon-cross.svg"} alt="" />
-              </button>
-            </div>
-          ))}
+          
+          <div className="overflow-y-auto custom-scrollbar">
+            {columns.map((column, index) => (
+              <div 
+                key={index} 
+                className="flex mb-[0.75rem] gap-4 pe-1"
+              >
+                <input
+                  className="flex-1 border-2 rounded-md px-[16px] py-[8px] dark:border-linesDark dark:bg-darkGrey text-bodyL leading-bodyL"
+                  type="text"
+                  placeholder="Nombre de columna"
+                  value={column.name}
+                  onChange={(e) => handleColumnChange(index, e.target.value)}
+                />
+                <button 
+                  onClick={(e) => {e.preventDefault(); removeColumn(index)}}>
+                  <Image width={20} height={20} src={"/img/icon-cross.svg"} alt="" />
+                </button>
+              </div>
+            ))}
+          </div>
 
         </div>
-
-
 
         <button 
           onClick={(e) => {e.preventDefault(); addColumns()}}
