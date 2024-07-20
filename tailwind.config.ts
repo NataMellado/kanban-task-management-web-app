@@ -50,6 +50,9 @@ const config: Config = {
         8.5: "2.125rem",
         9.5: "2.375rem",
         10.5: "2.625rem",
+        14: "3.5rem",
+        18: "4.5rem",
+        36: "9rem",
         72.5: "16rem",
         70: "17.5rem",
       },
@@ -58,6 +61,10 @@ const config: Config = {
       },
       zIndex: {
         '100': '100',
+        '110': '110',
+      },
+      screens: {
+        'md': '960px',
       }
     },
   },
