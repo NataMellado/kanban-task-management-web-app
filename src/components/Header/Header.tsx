@@ -16,7 +16,7 @@ const Header = () => {
     <header 
       className={`sticky top-0 flex items-center max-w-full bg-white dark:bg-darkGrey`}>
 
-      <div className={`header-logo flex flex-none items-center md:w-72.5 px-4 md:px-[2rem] border-b md:border-b-0  h-[3rem] md:h-[4rem] md:border-r border-linesLight dark:border-linesDark`}>
+      <div className={`header-logo flex flex-none items-center  md:w-72.5 px-[1rem] md:px-[1.5rem] border-b md:border-b-0  h-[4rem] md:border-r border-linesLight dark:border-linesDark`}>
         <Link href="/">
           <Image
             width={176}
@@ -43,21 +43,21 @@ const Header = () => {
             alt="Logo Alternativo"
             priority
             className="block md:hidden"
-            style={{ width: "1.25rem", height: "auto" }}
+            style={{ width: "1.4rem", height: "auto" }}
           />
         </Link>
       </div>
       
 
-      <div className={`flex justify-between w-full items-center md:px-6 h-[3rem] md:h-[4rem] gap-2 md:gap-8 border-b border-linesLight dark:border-linesDark overflow-hidden`}>
+      <div className={`flex justify-between w-full items-center md:px-6 h-[4rem] gap-2 md:gap-8 border-b border-linesLight dark:border-linesDark overflow-hidden`}>
 
-          <p className="text:headingM md:text-headingL2 font-extrabold text-black overflow-hidden overflow-ellipsis whitespace-nowrap dark:text-white ">
+          <p className="text-headingL font-extrabold text-black overflow-hidden overflow-ellipsis whitespace-nowrap dark:text-white ">
             {board?.name}
           </p>
     
         <div className="flex items-center gap-4 md:gap-6 flex-none whitespace-nowrap">
           <DarkModeSwitcher />
-          <button className="bg-mainPurple text-headingM font-bold rounded-[2rem] text-white py-2 px-4 md:py-[0.4rem] md:px-[1.2rem] hover:bg-mainPurpleHover">
+          <button className="bg-mainPurple text-headingM font-bold rounded-[2rem] text-white py-3 px-5 md:py-[0.4rem] md:px-[1.2rem] hover:bg-mainPurpleHover">
             <Image
               width={5}
               height={5}
@@ -73,7 +73,7 @@ const Header = () => {
         </div>
 
       </div>
-      <div className="border-b border-linesLight dark:border-linesDark px-4 md:ps-0 md:pe-6 h-[3rem] md:h-[4rem] flex ">
+      <div className="border-b border-linesLight dark:border-linesDark px-4 md:ps-0 md:pe-6 h-[4rem] flex ">
         <Dropdown />
       </div>
     </header>

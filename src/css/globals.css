@@ -2,18 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
-
 li {
   list-style: none;
 }
-
 
 .filter-white {
   filter: invert(100%) brightness(1000%);

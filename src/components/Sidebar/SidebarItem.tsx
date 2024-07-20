@@ -7,10 +7,9 @@ interface Props {
     label: string;
     route: string;
   };
-  boardName: string;
 }
 
-const SidebarItem: React.FC<Props> = ({ item, boardName }) => {
+const SidebarItem: React.FC<Props> = ({ item }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
   const isActive = false;
@@ -25,7 +24,7 @@ const SidebarItem: React.FC<Props> = ({ item, boardName }) => {
             isActive
               ? "bg-primary/[.07] text-primary dark:bg-white/10 dark:text-white"
               : "text-mediumGrey"
-          } group relative flex items-center gap-3 rounded-tr-[32px] rounded-br-[32px] mr-[24px] px-[24px] py-[15px] font-bold text-headingM duration-300 ease-in-out
+          } group relative flex items-center gap-3 rounded-tr-[32px] rounded-br-[32px] mr-[24px] px-[1rem] md:px-[1.5rem] py-[15px] font-bold text-headingM duration-300 ease-in-out
           hover:bg-lightGrey hover:text-mainPurple`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
