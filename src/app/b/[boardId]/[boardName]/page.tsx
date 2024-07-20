@@ -21,7 +21,7 @@ const BoardPage = () => {
 
       ) : (
 
-        <div className="flex flex-1 p-6 gap-6 overflow-x-auto overflow-y-hidden custom-scrollbar">
+        <div className="flex flex-1 p-6 gap-6 overflow-x-auto overflow-y-hidden custom-scrollbar-main">
           {board?.columns.map((column) => (
             <ColumnCard key={column.id} column={column} />
           ))}

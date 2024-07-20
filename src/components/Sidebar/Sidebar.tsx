@@ -45,7 +45,7 @@ const Sidebar = () => {
                   {group.name}
                 </h3>
 
-                <ul className="overflow-y-auto overflow-x-hidden mb-6 flex flex-col custom-scrollbar" style={{ maxHeight: 'calc(100vh - 250px)' }}>
+                <ul className="overflow-y-auto overflow-x-hidden mb-6 flex flex-col custom-scrollbar-sidebar" style={{ maxHeight: 'calc(100vh - 250px)' }}>
                   {group.menuItems.map((menuItem, menuIndex) => (
                     <SidebarItem
                       key={menuIndex}

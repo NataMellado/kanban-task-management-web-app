@@ -35,8 +35,33 @@ li {
   border-bottom: 1px solid #E4EBFA;
 }
 
-.custom-scrollbar {
+
+/* Custom Scrollbar */
+.custom-scrollbar-sidebar {
   scrollbar-width: thin;
-  scrollbar-color: #6471858e #f1f1f1;
-  
+  scrollbar-color: #6471858e #ffffff;
 }
+
+.dark .custom-scrollbar-sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: #6471858e #2B2C37;
+}
+
+.custom-scrollbar-column {
+  scrollbar-width: thin;
+  scrollbar-color: #6471858e #F4F7FD;
+}
+
+.dark .custom-scrollbar-column {
+  scrollbar-width: thin;
+  scrollbar-color: #6471858e #20212C;
+}
+
+.custom-scrollbar-main {
+  scrollbar-color: #6471858e #F4F7FD;
+}
+.dark .custom-scrollbar-main {
+  scrollbar-color: #6471858e #20212C;
+}
+
+

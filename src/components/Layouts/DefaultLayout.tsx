@@ -16,7 +16,7 @@ export default function DefaultLayout({
         <Header />
         <div className="flex flex-1">
           <Sidebar />
-          <main className={`flex flex-1 overflow-x-auto`}>
+          <main className={`flex flex-1 overflow-x-auto `}>
               {children}
           </main>
         </div>
