@@ -8,6 +8,7 @@ import SidebarItemNew from "@/components/Sidebar/SideBarItemNew";
 import useSidebarMode from "@/hooks/useSidebar";
 import useData from "@/hooks/useData";
 import { slugify } from "@/utils/slugify";
+import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher";
 
 
 const Sidebar = () => {
@@ -28,6 +29,7 @@ const Sidebar = () => {
 
   return (
     <div className="relative flex overflow-hidden">
+
 
        {/* <!-- Botón de alternancia del sidebar Mobile --> */}
        <div className="fixed z-40 translate-x-[0.8rem] -translate-y-[1rem] sm:hidden">
@@ -50,6 +52,8 @@ const Sidebar = () => {
         </button>
       </div>
 
+
+
       <aside
         className={`sidebar flex flex-col border-r border-linesLight bg-white transition-width duration-200 ease-in-out
           dark:border-linesDark dark:bg-darkGrey
@@ -65,11 +69,11 @@ const Sidebar = () => {
             {menuGroups.map((group, groupIndex) => (
             <div key={groupIndex}>
 
-                <h3 className="mb-[19px] pt-8 md:pt-3 text-nowrap text-headingS px-[1rem] md:px-[1.5rem] tracking-headingS font-bold text-mediumGrey">
+                <h3 className="mb-[19px] pt-6 md:pt-3 text-nowrap text-headingS px-[1rem] md:px-[1.5rem] tracking-headingS font-bold text-mediumGrey">
                   {group.name}
                 </h3>
 
-                <ul className="overflow-y-auto overflow-x-hidden mb-6 flex flex-col custom-scrollbar-sidebar" style={{ maxHeight: 'calc(100dvh - 250px)' }}>
+                <ul className="overflow-y-auto overflow-x-hidden flex flex-col custom-scrollbar-sidebar" style={{ maxHeight: 'calc(100dvh - 250px)' }}>
                   {group.menuItems.map((menuItem, menuIndex) => (
                     <SidebarItem
                       key={menuIndex}
@@ -77,15 +81,20 @@ const Sidebar = () => {
                     />
                   ))}
                 </ul>
-
+                
                 <div className="flex  ">
                   <SidebarItemNew modalOpen={modalOpen} setModalOpen={setModalOpen} />
+                </div>
+                <div className="md:hidden flex justify-center mt-4">
+                  <DarkModeSwitcher />
                 </div>
                 
               </div>
             ))}
           </nav>
         </div>
+
+        
       </aside>
 
       {/* <!-- Botón de alternancia del sidebar --> */}
@@ -103,6 +112,7 @@ const Sidebar = () => {
             height={20}
             src={sidebarMode === "closed" ? "/img/icon-show-sidebar.svg" : "/img/icon-hide-sidebar.svg"}
             alt=""
+            style={{ width: "1.3rem", height: "auto" }}
           />
         </button>
       </div>

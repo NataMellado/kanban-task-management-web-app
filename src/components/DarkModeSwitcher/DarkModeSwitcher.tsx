@@ -5,7 +5,7 @@ const DarkModeSwitcher = () => {
   const [colorMode, setColorMode] = useColorMode();
 
   return (
-    <ul className="hidden md:flex justify-center ">
+    <ul className="justify-center ">
       <li>
         <div
           onClick={() => {
@@ -13,7 +13,7 @@ const DarkModeSwitcher = () => {
               setColorMode(colorMode === "light" ? "dark" : "light");
             }
           }}
-          className={`relative  z-10 flex h-9 w-[80px] cursor-pointer items-center gap-2.5 rounded-full bg-lightGrey p-[5px] text-dark dark:bg-veryDarkGrey dark:text-white`}
+          className={`relative  z-10 flex h-10 w-[80px] cursor-pointer items-center gap-2.5 rounded-full bg-lightGrey p-[5px] text-dark dark:bg-veryDarkGrey dark:text-white`}
         >
           <div
             className={`absolute left-0.5 top-1/2 z-1 h-7.5 w-7.5 -translate-y-1/2 rounded-full bg-white transition-transform duration-300 ease-in-out dark:bg-mediumGrey ${

@@ -16,7 +16,7 @@ const SidebarItemNew: React.FC<SidebarItemNewProps> = (props) => {
           onClick={() => props.setModalOpen(!props.modalOpen)}
           className="cursor-pointer"
         >
-          <div className="group relative flex items-center gap-3 rounded-[32px] mr-[24px] px-[24px] py-[15px] font-bold text-headingM duration-300 text-mainPurple ease-in-out">
+          <div className="group relative flex items-center gap-3 rounded-[32px] mr-[24px] px-[1rem] md:px-[1.5rem] py-[15px] font-bold text-headingM duration-300 text-mainPurple ease-in-out">
             <Image
               width={16}
               height={16}
