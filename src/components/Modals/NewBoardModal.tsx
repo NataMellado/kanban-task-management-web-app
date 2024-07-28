@@ -4,6 +4,7 @@ import Image from "next/image";
 import ClickOutside from "../ClickOutside/ClickOutside";
 import { useData } from "@/context/BoardContext";
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from "next/navigation";
 
 interface Props {
   onClose: () => void;
@@ -11,6 +12,7 @@ interface Props {
 
 const NewBoardModal = ({ onClose }: Props) => {
   const { addBoard } = useData();
+  const router = useRouter();
 
   // State to store new board data
   const [newBoard, setNewBoard] = useState({
@@ -24,6 +26,7 @@ const NewBoardModal = ({ onClose }: Props) => {
     e.preventDefault();
     addBoard(newBoard);
     onClose();
+    router.push(`/b/${newBoard.id}/${newBoard.name}`);
   };
 
   // Function to handle board name change
@@ -38,7 +41,6 @@ const NewBoardModal = ({ onClose }: Props) => {
     );
     setNewBoard({ ...newBoard, columns: updatedColumns });
   }
-  
 
    // Function to add a column to the new board
    const addColumn = () => {
@@ -47,20 +49,11 @@ const NewBoardModal = ({ onClose }: Props) => {
     setNewBoard({ ...newBoard, columns });
   }
 
-
   // Function to remove a column from the new board
   const removeColumn = (index: number) => {
     const columns = newBoard.columns.filter((_, i) => i !== index);
     setNewBoard({ ...newBoard, columns });
   }
-
-
-
-
-  
-
-
-  
 
   return (
     <div className="fixed w-full items-center justify-center top-0 left-0 right-0 bottom-0 flex z-50 bg-black bg-opacity-50">
