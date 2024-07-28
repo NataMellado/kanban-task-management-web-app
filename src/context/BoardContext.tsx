@@ -1,37 +1,50 @@
 "use client";
 
-import { useEffect, useState, createContext, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+  ReactNode,
+} from "react";
 import { Board } from "@/types/Board";
 
-interface BoardContexrProps {
+interface BoardContextProps {
   boardData: Board[];
   setBoardData: (data: Board[]) => void;
   addBoard: (newBoard: Board) => void;
   getBoard: (boardId: string) => Board | undefined;
+  removeBoard: (boardId: string) => void;
 }
 
-const BoardContext = createContext<BoardContexrProps | undefined>(undefined);
+const BoardContext = createContext<BoardContextProps | undefined>(undefined);
 
-const useData = () => {
-  // State to store the data
+interface BoardProviderProps {
+  children: ReactNode;
+}
+
+export const BoardProvider: React.FC<BoardProviderProps> = ({ children }) => {
+  
+    // State to store the data
   const [boardData, setBoardData] = useState<Board[]>([]);
 
-  // Function to save data to local storage
-  const saveToLocalStorage = (data: Board[]) => {
+  // Function to update data in local storage and state
+  const updateData = (data: Board[]) => {
     localStorage.setItem("boardStorage", JSON.stringify(data));
-  }
+    setBoardData(data);
+  };
 
   // Function to fech initial data from the JSON file
   const fetchInitialData = async () => {
     try {
       const response = await fetch("/data/data.json");
       if (!response.ok) {
-        throw new Error("Error al cargar los datos iniciales");
+        throw new Error("Error loading initial data");
       }
       const data = await response.json();
       return data.boards || [];
     } catch (error) {
-      console.error("Error al cargar los datos iniciales:", error);
+      console.error("Error loading initial data:", error);
       return [];
     }
   };
@@ -43,36 +56,40 @@ const useData = () => {
       setBoardData(JSON.parse(storedData));
     } else {
       fetchInitialData().then((data) => {
-        setBoardData(data);
-        saveToLocalStorage(data);
+        updateData(data);
       });
     }
   }, []);
 
-  // 
-
-
-
   // Function to add a new board
   const addBoard = (newBoard: Board) => {
     const storedData = JSON.parse(localStorage.getItem("boardStorage") || "[]");
-    const updatedData = [...storedData, newBoard];
-    saveToLocalStorage(updatedData);
-    setBoardData(updatedData);
+    updateData([...storedData, newBoard]);
   };
-
-  
-
 
   // Function to get a board by its id
   const getBoard = (boardId: string) => {
     return boardData.find((board) => board.id === boardId);
-  }
+  };
 
+  // Function to remove a board by its id
+  const removeBoard = (boardId: string) => {
+    updateData(boardData.filter((board) => board.id !== boardId));
+  };
 
-
-
-  return { boardData, setBoardData, addBoard, getBoard };
+  return (
+    <BoardContext.Provider
+      value={{ boardData, setBoardData, addBoard, getBoard, removeBoard }}
+    >
+      {children}
+    </BoardContext.Provider>
+  );
 };
 
-export default useData;
+export const useData = () => {
+  const context = useContext(BoardContext);
+  if (!context) {
+    throw new Error("useData must be used within a BoardProvider");
+  }
+  return context;
+};

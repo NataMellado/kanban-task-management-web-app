@@ -6,16 +6,16 @@ import Image from "next/image";
 import SidebarItem from "@/components/Sidebar/SidebarItem";
 import SidebarItemNew from "@/components/Sidebar/SideBarItemNew";
 import useSidebarMode from "@/hooks/useSidebar";
-import useData from "@/hooks/useData";
+import { useData } from "@/context/BoardContext";
 import { slugify } from "@/utils/slugify";
 import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher";
 
 
 const Sidebar = () => {
   const [sidebarMode, setSidebarMode] = useSidebarMode();
-  const pathname = usePathname();
   const { boardData } = useData();
   const [modalOpen, setModalOpen] = React.useState(false);
+  const pathname = usePathname();
 
   const menuGroups = [
     {

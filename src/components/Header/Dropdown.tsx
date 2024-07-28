@@ -2,9 +2,20 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ClickOutside from "../ClickOutside/ClickOutside";
+import { useData } from "@/context/BoardContext";
+import { useParams, useRouter } from "next/navigation";
 
 const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { boardId } = useParams() as { boardId: string };
+    const { removeBoard } = useData();
+    const router = useRouter();
+
+    const handleRemoveBoard = () => {
+        removeBoard(boardId);
+        setIsOpen(false);
+        router.replace("/");
+    };
 
     return (
         <ClickOutside onClick={() => setIsOpen(false)} className="relative flex flex-none">
@@ -30,7 +41,7 @@ const Dropdown = () => {
                         <li className="px-4 py-2 text-mediumGrey hover:bg-primary dark:hover:bg-primary dark:">
                             <Link href="#">Editar tablero</Link>
                             </li>
-                        <li className="px-4 py-2 text-red hover:bg-primary  dark:hover:bg-primary dark:">
+                        <li onClick={handleRemoveBoard} className="px-4 py-2 text-red hover:bg-primary  dark:hover:bg-primary dark:">
                             <Link href="#">Eliminar tablero</Link>
                         </li>
                     </ul>

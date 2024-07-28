@@ -2,48 +2,64 @@
 import React, {useState, FormEvent} from "react";
 import Image from "next/image";
 import ClickOutside from "../ClickOutside/ClickOutside";
-import useData from "@/hooks/useData";
-import { v4 as uuidv4 } from "uuid";
+import { useData } from "@/context/BoardContext";
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
   onClose: () => void;
 }
 
 const NewBoardModal = ({ onClose }: Props) => {
-  const [boardName, setBoardName] = useState("");
   const { addBoard } = useData();
 
-  const [columns, setColumns] = useState([
-    { id: uuidv4(), name: "Por hacer", tasks: [] },
-    { id: uuidv4(), name: "En curso", tasks: [] }  
-  ]);
+  // State to store new board data
+  const [newBoard, setNewBoard] = useState({
+    id: uuidv4(),
+    name: "",
+    columns: [{ id: uuidv4(), name: "", tasks: [] }],
+  });
   
+  // Function to handle board submit
   const handleSubmit =  (e: FormEvent) => {
     e.preventDefault();
-    const newBoard = {
-      id: Date.now().toString(),
-      name: boardName,
-      columns: columns.filter((column) => column.name.trim() !== ""),
-    };
     addBoard(newBoard);
     onClose();
   };
 
-  const handleColumnChange = (index: number, value: string) => {
-    const newColumns = [...columns];
-    newColumns[index].name = value;
-    setColumns(newColumns);
+  // Function to handle board name change
+  const handleBoardChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewBoard({ ...newBoard, name: e.target.value });
   };
 
-  const addColumns = () => {
-    const newColumn = { id: uuidv4() , name: "", tasks: [] };
-    setColumns([...columns, newColumn]);
-  };
+  // Function to handle column name change
+  const handleColumnChange = (index: number, name: string) => {
+    const updatedColumns = newBoard.columns.map((column, colIndex) =>
+      colIndex === index ? { ...column, name } : column
+    );
+    setNewBoard({ ...newBoard, columns: updatedColumns });
+  }
+  
 
+   // Function to add a column to the new board
+   const addColumn = () => {
+    const newCol = { id: uuidv4(), name: "", tasks: [] };
+    const columns = [...newBoard.columns, newCol];
+    setNewBoard({ ...newBoard, columns });
+  }
+
+
+  // Function to remove a column from the new board
   const removeColumn = (index: number) => {
-    const newColumns = columns.filter((_, colIndex) => colIndex !== index);
-    setColumns(newColumns);
-  };
+    const columns = newBoard.columns.filter((_, i) => i !== index);
+    setNewBoard({ ...newBoard, columns });
+  }
+
+
+
+
+  
+
+
   
 
   return (
@@ -66,10 +82,12 @@ const NewBoardModal = ({ onClose }: Props) => {
         <input
           className="mb-[2.5rem] border-2 rounded-md px-[16px] py-[8px] dark:border-linesDark dark:bg-darkGrey text-bodyL leading-bodyL"
           type="text"
-          placeholder="p.ej. Proyecto de diseño web"
           id="boardName"
-          value={boardName}
-          onChange={(e) => setBoardName(e.target.value)}
+          name="boardName"
+          placeholder="p.ej. Proyecto de diseño web"
+          value={newBoard.name}
+          onChange={handleBoardChange}
+          required
         />
 
         <div className="flex flex-col overflow-hidden">
@@ -81,9 +99,9 @@ const NewBoardModal = ({ onClose }: Props) => {
           </label>
           
           <div className="overflow-y-auto custom-scrollbar">
-            {columns.map((column, index) => (
-              <div 
-                key={index} 
+            {newBoard.columns.map((column, index) => (
+              <div
+                key={column.id}
                 className="flex mb-[0.75rem] gap-4 pe-1"
               >
                 <input
@@ -92,19 +110,22 @@ const NewBoardModal = ({ onClose }: Props) => {
                   placeholder="Nombre de columna"
                   value={column.name}
                   onChange={(e) => handleColumnChange(index, e.target.value)}
+                  required
                 />
                 <button 
-                  onClick={(e) => {e.preventDefault(); removeColumn(index)}}>
+                  type="button"
+                  onClick={() => removeColumn(index)}
+                >
                   <Image width={20} height={20} src={"/img/icon-cross.svg"} alt="" />
                 </button>
               </div>
             ))}
           </div>
-
         </div>
 
         <button 
-          onClick={(e) => {e.preventDefault(); addColumns()}}
+          type="button"
+          onClick={addColumn}
           className="mb-[2.5rem] px-[16px] py-[8px] rounded-[2rem] text-headingM text-mainPurple bg-lightPurple dark:bg-white dark:text-mainPurple font-bold ">
           + Añadir columna
         </button>

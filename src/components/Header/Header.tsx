@@ -5,7 +5,7 @@ import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher";
 import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import useData from "@/hooks/useData";
+import { useData } from "@/context/BoardContext";
 
 const Header = () => {
   const { boardId } = useParams() as { boardId: string };
