@@ -11,6 +11,7 @@ const Header = () => {
   const { boardId } = useParams() as { boardId: string };
   const { getBoard } = useData();
   const board = getBoard(boardId);
+  const isAddTaskDisabled = !board?.columns || board?.columns.length === 0;
 
   return (
     <header
@@ -63,7 +64,11 @@ const Header = () => {
             <DarkModeSwitcher />
           </div>
           
-          <button className="bg-mainPurple text-headingM font-bold rounded-[2rem] text-white py-3 px-5 md:py-[0.4rem] md:px-[1.2rem] hover:bg-mainPurpleHover transition ease-in-out">
+          <button className={`bg-mainPurple text-headingM font-bold rounded-[2rem] text-white py-3 px-5 md:py-[0.4rem] md:px-[1.2rem] hover:bg-mainPurpleHover transition ease-in-out
+            ${isAddTaskDisabled 
+              ? "opacity-25 cursor-not-allowed" 
+              : ""}
+          `}>
             <Image
               width={5}
               height={5}
