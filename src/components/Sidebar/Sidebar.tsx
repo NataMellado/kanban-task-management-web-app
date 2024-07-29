@@ -10,7 +10,6 @@ import { useData } from "@/context/BoardContext";
 import { slugify } from "@/utils/slugify";
 import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher";
 
-
 const Sidebar = () => {
   const [sidebarMode, setSidebarMode] = useSidebarMode();
   const { boardData } = useData();
@@ -29,13 +28,15 @@ const Sidebar = () => {
 
   return (
     <div className="relative flex overflow-hidden">
-
-
-       {/* <!-- Botón de alternancia del sidebar Mobile --> */}
-       <div className="fixed z-40 translate-x-[0.8rem] -translate-y-[1rem] sm:hidden">
+      {/* <!-- Toggle del sidebar en móvil --> */}
+      <div className="fixed z-40 translate-x-[0.8rem] -translate-y-[1rem] sm:hidden">
         <button
           className={`bg-white dark:bg-darkGrey rounded-[2rem] h-[1.8rem] w-[1.8rem] flex items-center justify-center border border-linesLight dark:border-linesDark transition-transform duration-200
-          ${sidebarMode === "open" ? "transform -rotate-180 translate-x-[14.3rem] " : ""}`}
+          ${
+            sidebarMode === "open"
+              ? "transform -rotate-180 translate-x-[14.3rem] "
+              : ""
+          }`}
           onClick={() => {
             if (typeof setSidebarMode === "function") {
               setSidebarMode(sidebarMode === "open" ? "closed" : "open");
@@ -52,52 +53,46 @@ const Sidebar = () => {
         </button>
       </div>
 
-
-
+      {/* <!-- Menú del sidebar --> */}
       <aside
         className={`sidebar flex flex-col border-r border-linesLight bg-white transition-width duration-200 ease-in-out
           dark:border-linesDark dark:bg-darkGrey
           ${sidebarMode === "closed" ? "w-0" : "w-72.5"}
         `}
       >
-
-        
-
-        {/* <!-- Menú del sidebar --> */}
         <div className="flex flex-col">
-          <nav >
+          <nav>
             {menuGroups.map((group, groupIndex) => (
-            <div key={groupIndex}>
-
+              <div key={groupIndex}>
                 <h3 className="mb-[19px] pt-6 md:pt-3 text-nowrap text-headingS px-[1rem] md:px-[1.5rem] tracking-headingS font-bold text-mediumGrey">
                   {group.name}
                 </h3>
 
-                <ul className="overflow-y-auto overflow-x-hidden flex flex-col custom-scrollbar-sidebar" style={{ maxHeight: 'calc(100dvh - 250px)' }}>
+                <ul
+                  className="overflow-y-auto overflow-x-hidden flex flex-col custom-scrollbar-sidebar"
+                  style={{ maxHeight: "calc(100dvh - 250px)" }}
+                >
                   {group.menuItems.map((menuItem, menuIndex) => (
-                    <SidebarItem
-                      key={menuIndex}
-                      item={menuItem}          
-                    />
+                    <SidebarItem key={menuIndex} item={menuItem} />
                   ))}
                 </ul>
-                
+
                 <div className="flex  ">
-                  <SidebarItemNew modalOpen={modalOpen} setModalOpen={setModalOpen} />
+                  <SidebarItemNew
+                    modalOpen={modalOpen}
+                    setModalOpen={setModalOpen}
+                  />
                 </div>
                 <div className="md:hidden flex justify-center mt-4">
                   <DarkModeSwitcher />
                 </div>
-                
               </div>
             ))}
           </nav>
         </div>
-
-        
       </aside>
 
-      {/* <!-- Botón de alternancia del sidebar --> */}
+      {/* <!-- Toggle del sidebar en desktop --> */}
       <div className="fixed z-40 bottom-0 -translate-y-[0.8rem] hidden sm:block">
         <button
           className="bg-mainPurple rounded-tr-[2rem] rounded-br-[2rem] hover:bg-mainPurpleHover h-[3rem] w-[2.5rem] flex items-center ps-2"
@@ -110,13 +105,16 @@ const Sidebar = () => {
           <Image
             width={20}
             height={20}
-            src={sidebarMode === "closed" ? "/img/icon-show-sidebar.svg" : "/img/icon-hide-sidebar.svg"}
+            src={
+              sidebarMode === "closed"
+                ? "/img/icon-show-sidebar.svg"
+                : "/img/icon-hide-sidebar.svg"
+            }
             alt=""
             style={{ width: "1.3rem", height: "auto" }}
           />
         </button>
       </div>
-
     </div>
   );
 };

@@ -10,6 +10,7 @@ const Dropdown = () => {
     const { boardId } = useParams() as { boardId: string };
     const { removeBoard } = useData();
     const router = useRouter();
+    const isDropdownDisabled = !boardId;
 
     const handleRemoveBoard = () => {
         removeBoard(boardId);
@@ -17,11 +18,19 @@ const Dropdown = () => {
         router.replace("/");
     };
 
+    const toggleDropdown = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (!isDropdownDisabled) {
+            setIsOpen(!isOpen);
+        }
+    }
+
     return (
         <ClickOutside onClick={() => setIsOpen(false)} className="relative flex flex-none">
             <Link
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex flex-none items-center gap-4  "
+                onClick={toggleDropdown}
+                className={`flex flex-none items-center gap-4 *
+                    ${isDropdownDisabled ? "cursor-not-allowed" : ""}`}
                 href="#"
             >
             
