@@ -7,12 +7,20 @@ interface Props {
     label: string;
     route: string;
   };
+  isActive: boolean;
 }
 
-const SidebarItem: React.FC<Props> = ({ item }) => {
+const SidebarItem: React.FC<Props> = ({ item, isActive }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
-  const isActive = false;
+  const getFilter = () => {
+    if (isActive) {
+      return "invert(100%)"
+    }
+    return isHovered
+      ? "invert(52%) sepia(46%) saturate(6417%) hue-rotate(223deg) brightness(83%) contrast(85%)"
+      : "invert(58%) sepia(7%) saturate(886%) hue-rotate(177deg) brightness(95%) contrast(95%)";
+  };
 
   return (
     <li>
@@ -22,10 +30,11 @@ const SidebarItem: React.FC<Props> = ({ item }) => {
         className={`
           ${
             isActive
-              ? "bg-primary/[.07] text-primary dark:bg-white/10 dark:text-white"
+              ? "bg-mainPurple text-white"
               : "text-mediumGrey"
           } group relative flex items-center gap-3 rounded-tr-[32px] rounded-br-[32px] mr-[24px] px-[1rem] md:px-[1.5rem] py-[15px] font-bold text-headingM duration-300 ease-in-out
-          hover:bg-lightGrey hover:text-mainPurple`}
+         ${isActive ? "": "hover:bg-lightGrey hover:text-mainPurple"}
+        `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -38,9 +47,7 @@ const SidebarItem: React.FC<Props> = ({ item }) => {
             width: "auto",
             height: "auto",
             fill: "#828FA3",
-            filter: isHovered
-              ? "invert(52%) sepia(46%) saturate(6417%) hue-rotate(223deg) brightness(83%) contrast(85%)"
-              : "invert(58%) sepia(7%) saturate(886%) hue-rotate(177deg) brightness(95%) contrast(95%)",
+            filter: getFilter(),
           }}
         />
         <div className="max-w-full overflow-hidden overflow-ellipsis whitespace-nowrap">

@@ -73,7 +73,11 @@ const Sidebar = () => {
                   style={{ maxHeight: "calc(100dvh - 250px)" }}
                 >
                   {group.menuItems.map((menuItem, menuIndex) => (
-                    <SidebarItem key={menuIndex} item={menuItem} />
+                    <SidebarItem 
+                      key={menuIndex} 
+                      item={menuItem} 
+                      isActive={pathname === menuItem.route}
+                    />
                   ))}
                 </ul>
 
