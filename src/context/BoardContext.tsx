@@ -1,13 +1,12 @@
 "use client";
-
 import React, {
   useEffect,
-  useState,
   createContext,
   useContext,
   ReactNode,
 } from "react";
 import { Board } from "@/types/Board";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 // Context to store the board data
 interface BoardContextProps {
@@ -25,14 +24,7 @@ interface BoardProviderProps {
 }
 
 export const BoardProvider: React.FC<BoardProviderProps> = ({ children }) => {
-  // State to store the data
-  const [boardData, setBoardData] = useState<Board[]>([]);
-
-  // Function to update data in local storage and state
-  const updateData = (data: Board[]) => {
-    localStorage.setItem("boardStorage", JSON.stringify(data));
-    setBoardData(data);
-  };
+  const [boardData, setBoardData] = useLocalStorage<Board[]>("boardStorage", []);
 
   // Function to fech initial data from the JSON file
   const fetchInitialData = async () => {
@@ -51,20 +43,14 @@ export const BoardProvider: React.FC<BoardProviderProps> = ({ children }) => {
 
   // useEffect hook to initialize data from local storage or fetch it from the JSON file
   useEffect(() => {
-    const storedData = localStorage.getItem("boardStorage");
-    if (storedData) {
-      setBoardData(JSON.parse(storedData));
-    } else {
-      fetchInitialData().then((data) => {
-        updateData(data);
-      });
+    if (!boardData.length) {
+      fetchInitialData().then((data) => setBoardData(data));
     }
   }, []);
 
   // Function to add a new board
   const addBoard = (newBoard: Board) => {
-    const storedData = JSON.parse(localStorage.getItem("boardStorage") || "[]");
-    updateData([...storedData, newBoard]);
+    setBoardData((prevData) => [...prevData, newBoard]);
   };
 
   // Function to get a board by its id
@@ -74,7 +60,7 @@ export const BoardProvider: React.FC<BoardProviderProps> = ({ children }) => {
 
   // Function to remove a board by its id
   const removeBoard = (boardId: string) => {
-    updateData(boardData.filter((board) => board.id !== boardId));
+    setBoardData((prevData) => prevData.filter((board) => board.id !== boardId));
   };
 
   return (

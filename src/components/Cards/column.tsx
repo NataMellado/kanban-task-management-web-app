@@ -1,8 +1,6 @@
 import React from "react";
-import TaskCard from "@/components/Cards/task";
 import { Column } from "@/types/Board";
-
-
+import TaskCard from "@/components/Cards/task";
 
 const ColumnCard = ({ column }: { column: Column }) => {
     return (

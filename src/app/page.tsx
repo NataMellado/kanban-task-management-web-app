@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useData } from "@/context/BoardContext";
 import { slugify } from "@/utils/slugify";
@@ -12,6 +11,7 @@ const HomePage = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
+  // Use effect to redirect to the first board if there is one
   useEffect(() => {
     if (boardData.length > 0) {
       const firstBoard = boardData[0];
@@ -21,10 +21,10 @@ const HomePage = () => {
     }
   }, [boardData, router]);
 
-  if (loading) {
-    return;
-  }
+  // If the page is loading don't show anything
+  if (loading) {return};
 
+  // If there are no boards, show a message to create one
   if (boardData.length === 0) {
     return (
       <div className="flex flex-1 flex-col gap-[2rem] items-center justify-center px-4">

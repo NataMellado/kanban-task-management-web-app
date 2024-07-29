@@ -1,14 +1,15 @@
 "use client";
 import React from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
-import SidebarItem from "@/components/Sidebar/SidebarItem";
-import SidebarItemNew from "@/components/Sidebar/SideBarItemNew";
+import { usePathname } from "next/navigation";
+
 import useSidebarMode from "@/hooks/useSidebar";
 import { useData } from "@/context/BoardContext";
 import { slugify } from "@/utils/slugify";
-import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher";
+
+import DarkModeSwitcher from "@/components/DarkModeSwitcher/DarkModeSwitcher";
+import SidebarItem from "@/components/Sidebar/SidebarItem";
+import SidebarItemNew from "@/components/Sidebar/SideBarItemNew";
 
 const Sidebar = () => {
   const [sidebarMode, setSidebarMode] = useSidebarMode();

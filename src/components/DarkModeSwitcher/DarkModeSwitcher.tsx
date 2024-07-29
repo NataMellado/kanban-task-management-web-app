@@ -1,5 +1,5 @@
-import useColorMode from "@/hooks/useColorMode";
 import Image from "next/image";
+import useColorMode from "@/hooks/useColorMode";
 
 const DarkModeSwitcher = () => {
   const [colorMode, setColorMode] = useColorMode();

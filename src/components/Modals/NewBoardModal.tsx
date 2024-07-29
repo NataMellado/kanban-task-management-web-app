@@ -1,10 +1,12 @@
 "use client";
 import React, {useState, FormEvent} from "react";
 import Image from "next/image";
-import ClickOutside from "../ClickOutside/ClickOutside";
-import { useData } from "@/context/BoardContext";
-import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from 'uuid';
+
+import { useData } from "@/context/BoardContext";
+import { slugify } from "@/utils/slugify";
+import ClickOutside from "@/components/ClickOutside/ClickOutside";
 
 interface Props {
   onClose: () => void;
@@ -26,7 +28,7 @@ const NewBoardModal = ({ onClose }: Props) => {
     e.preventDefault();
     addBoard(newBoard);
     onClose();
-    router.push(`/b/${newBoard.id}/${newBoard.name}`);
+    router.push(`/b/${newBoard.id}/${slugify(newBoard.name)}`);
   };
 
   // Function to handle board name change

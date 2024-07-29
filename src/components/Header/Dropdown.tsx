@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ClickOutside from "../ClickOutside/ClickOutside";
-import { useData } from "@/context/BoardContext";
 import { useParams, useRouter } from "next/navigation";
+
+import { useData } from "@/context/BoardContext";
+import ClickOutside from "@/components/ClickOutside/ClickOutside";
 
 const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);

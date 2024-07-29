@@ -1,5 +1,5 @@
 import React from 'react';
-import { Task } from '../../types/Board';
+import { Task } from '@/types/Board';
 
 const TaskCard = ({ task }: { task: Task }) => {
   return (
