@@ -13,10 +13,13 @@ const BoardPage = () => {
     <>
       {board?.columns.length === 0 ? (
 
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 flex-col gap-[2rem] items-center justify-center px-4">
           <h1 className="text-center text-headingL font-bold text-mediumGrey">
             Este tablero está vacío. Crea una columna para empezar.
           </h1>
+          <button className="text-headingM text-white font-bold bg-mainPurple py-[14px] px-[18px] rounded-[2rem] hover:bg-mainPurpleHover transition ease-in-out whitespace-nowrap">
+            + Añadir columna
+          </button>
         </div>
 
       ) : (

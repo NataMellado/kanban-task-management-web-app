@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { Board } from "@/types/Board";
 
+// Context to store the board data
 interface BoardContextProps {
   boardData: Board[];
   setBoardData: (data: Board[]) => void;
@@ -16,16 +17,15 @@ interface BoardContextProps {
   getBoard: (boardId: string) => Board | undefined;
   removeBoard: (boardId: string) => void;
 }
-
 const BoardContext = createContext<BoardContextProps | undefined>(undefined);
 
+// Provider to store the board data
 interface BoardProviderProps {
   children: ReactNode;
 }
 
 export const BoardProvider: React.FC<BoardProviderProps> = ({ children }) => {
-  
-    // State to store the data
+  // State to store the data
   const [boardData, setBoardData] = useState<Board[]>([]);
 
   // Function to update data in local storage and state

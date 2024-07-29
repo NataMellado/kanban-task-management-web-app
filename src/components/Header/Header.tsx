@@ -63,7 +63,7 @@ const Header = () => {
             <DarkModeSwitcher />
           </div>
           
-          <button className="bg-mainPurple text-headingM font-bold rounded-[2rem] text-white py-3 px-5 md:py-[0.4rem] md:px-[1.2rem] hover:bg-mainPurpleHover">
+          <button className="bg-mainPurple text-headingM font-bold rounded-[2rem] text-white py-3 px-5 md:py-[0.4rem] md:px-[1.2rem] hover:bg-mainPurpleHover transition ease-in-out">
             <Image
               width={5}
               height={5}
