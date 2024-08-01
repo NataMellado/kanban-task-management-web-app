@@ -58,7 +58,7 @@ const NewBoardModal = ({ onClose }: Props) => {
   }
 
   return (
-    <div className="fixed w-full items-center justify-center top-0 left-0 right-0 bottom-0 flex z-50 bg-black bg-opacity-50">
+    <div className="fixed w-full items-center justify-center top-0 left-0 right-0 bottom-0 flex z-50 bg-black bg-opacity-70">
       <ClickOutside className="flex w-full max-w-[30rem]" onClick={onClose}>
 
       <form 

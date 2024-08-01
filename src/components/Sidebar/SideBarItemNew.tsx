@@ -3,17 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import NewBoardModal from "../Modals/NewBoardModal";
 
-interface SidebarItemNewProps {
-  modalOpen: boolean;
-  setModalOpen: (arg0: boolean) => void;
-}
-
-const SidebarItemNew: React.FC<SidebarItemNewProps> = (props) => {
+const SidebarItemNew = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <>
       <li>
         <div
-          onClick={() => props.setModalOpen(!props.modalOpen)}
+          onClick={() => setModalOpen(true)}
           className="cursor-pointer"
         >
           <div className="group relative flex items-center gap-3 rounded-[32px] mr-[24px] px-[1rem] md:px-[1.5rem] py-[15px] font-bold text-headingM duration-300 text-mainPurple ease-in-out">
@@ -35,8 +31,7 @@ const SidebarItemNew: React.FC<SidebarItemNewProps> = (props) => {
           </div>
         </div>
       </li>
-
-      {props.modalOpen && <NewBoardModal onClose={() => props.setModalOpen(false)} />}
+      {modalOpen && <NewBoardModal onClose={() => setModalOpen(false)} />}
     </>
   );
 };

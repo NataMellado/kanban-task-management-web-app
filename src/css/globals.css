@@ -40,12 +40,12 @@ li {
 
 .custom-scrollbar-column {
   scrollbar-width: thin;
-  scrollbar-color: #6471858e #F4F7FD;
+  scrollbar-color: #6471858e transparent;
 }
 
 .dark .custom-scrollbar-column {
   scrollbar-width: thin;
-  scrollbar-color: #6471858e #20212C;
+  scrollbar-color: #6471858e transparent;
 }
 
 .custom-scrollbar-main {

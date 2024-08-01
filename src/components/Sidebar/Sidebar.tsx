@@ -14,7 +14,6 @@ import SidebarItemNew from "@/components/Sidebar/SideBarItemNew";
 const Sidebar = () => {
   const [sidebarMode, setSidebarMode] = useSidebarMode();
   const { boardData } = useData();
-  const [modalOpen, setModalOpen] = React.useState(false);
   const pathname = usePathname();
 
   const menuGroups = [
@@ -83,10 +82,7 @@ const Sidebar = () => {
                 </ul>
 
                 <div className="flex  ">
-                  <SidebarItemNew
-                    modalOpen={modalOpen}
-                    setModalOpen={setModalOpen}
-                  />
+                  <SidebarItemNew/>
                 </div>
                 <div className="md:hidden flex justify-center mt-4">
                   <DarkModeSwitcher />

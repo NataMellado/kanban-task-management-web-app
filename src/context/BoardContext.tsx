@@ -1,11 +1,6 @@
 "use client";
-import React, {
-  useEffect,
-  createContext,
-  useContext,
-  ReactNode,
-} from "react";
-import { Board } from "@/types/Board";
+import React, { useEffect, createContext, useContext, ReactNode } from "react";
+import { Board, Column } from "@/types/Board";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
 // Context to store the board data
@@ -13,6 +8,7 @@ interface BoardContextProps {
   boardData: Board[];
   setBoardData: (data: Board[]) => void;
   addBoard: (newBoard: Board) => void;
+  addColumns: (boardId: string, newColumns: Column[]) => void;
   getBoard: (boardId: string) => Board | undefined;
   removeBoard: (boardId: string) => void;
 }
@@ -24,7 +20,10 @@ interface BoardProviderProps {
 }
 
 export const BoardProvider: React.FC<BoardProviderProps> = ({ children }) => {
-  const [boardData, setBoardData] = useLocalStorage<Board[]>("boardStorage", []);
+  const [boardData, setBoardData] = useLocalStorage<Board[]>(
+    "boardStorage",
+    []
+  );
 
   // Function to fech initial data from the JSON file
   const fetchInitialData = async () => {
@@ -53,6 +52,17 @@ export const BoardProvider: React.FC<BoardProviderProps> = ({ children }) => {
     setBoardData((prevData) => [...prevData, newBoard]);
   };
 
+  // Function to add columns to a board
+  const addColumns = (boardId: string, newColumns: Column[]) => {
+    setBoardData((prevData) =>
+      prevData.map((board) =>
+        board.id === boardId
+          ? { ...board, columns: [...board.columns, ...newColumns] }
+          : board
+      )
+    );
+  };
+
   // Function to get a board by its id
   const getBoard = (boardId: string) => {
     return boardData.find((board) => board.id === boardId);
@@ -60,12 +70,21 @@ export const BoardProvider: React.FC<BoardProviderProps> = ({ children }) => {
 
   // Function to remove a board by its id
   const removeBoard = (boardId: string) => {
-    setBoardData((prevData) => prevData.filter((board) => board.id !== boardId));
+    setBoardData((prevData) =>
+      prevData.filter((board) => board.id !== boardId)
+    );
   };
 
   return (
     <BoardContext.Provider
-      value={{ boardData, setBoardData, addBoard, getBoard, removeBoard }}
+      value={{
+        boardData,
+        setBoardData,
+        addBoard,
+        addColumns,
+        getBoard,
+        removeBoard,
+      }}
     >
       {children}
     </BoardContext.Provider>
