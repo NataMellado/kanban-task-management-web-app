@@ -14,7 +14,7 @@ const Dropdown = () => {
     const isDropdownDisabled = !boardId;
 
     const handleRemoveBoard = () => {
-        removeBoard(boardId);
+        removeBoard(parseInt(boardId));
         setIsOpen(false);
         router.replace("/");
     };

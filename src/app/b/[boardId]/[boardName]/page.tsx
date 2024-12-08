@@ -10,11 +10,12 @@ const BoardPage = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const { boardId } = useParams() as { boardId: string };
   const { getBoard } = useData();
-  const board = getBoard(boardId);
+  const board = getBoard(parseInt(boardId));
+
 
   return (
     <>
-        <div className="flex p-4 gap-4 overflow-x-auto overflow-y-hidden custom-scrollbar-main">
+        <div className="flex p-4 gap-4 overflow-x-auto overflow-y-hidden custom-scrollbar-main focus:outline-none"  >
           {board?.columns.map((column) => (
             <ColumnCard key={column.id} column={column} />
           ))}

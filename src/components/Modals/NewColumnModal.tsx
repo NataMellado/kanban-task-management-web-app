@@ -14,11 +14,11 @@ interface Props {
 const NewColumnModal = ({ onClose }: Props) => {
   const { boardId } = useParams() as { boardId: string };
   const { addColumns } = useData();
+  const numBoardId = parseInt(boardId) 
 
   // State to store new columns
   const [newColumns, setNewColumns] = useState([
     {
-      id: uuidv4(),
       name: "",
       tasks: [],
     },
@@ -47,7 +47,15 @@ const NewColumnModal = ({ onClose }: Props) => {
   // Function to handle form submit
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    addColumns(boardId, newColumns);
+    console.log("Enviando columnas al backend con boardId como string:", {
+      boardId: boardId,
+      columns: newColumns
+    });
+    console.log("Enviando columnas al backend con boardId como numero:", {
+      boardId: parseInt(boardId),
+      columns: newColumns
+    });
+    addColumns(numBoardId, newColumns);
     onClose();
   };
 
@@ -64,7 +72,7 @@ const NewColumnModal = ({ onClose }: Props) => {
           <div className="flex flex-col overflow-hidden">
             <div className="overflow-y-auto custom-scrollbar">
               {newColumns.map((column, index) => (
-                <div key={column.id} className="flex mb-[0.75rem] gap-4 pe-1">
+                <div key={index} className="flex mb-[0.75rem] gap-4 pe-1">
                   <input
                     className="flex-1 border-2 rounded-md px-[16px] py-[8px] dark:border-linesDark dark:bg-darkGrey text-bodyL leading-bodyL"
                     type="text"

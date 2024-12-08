@@ -2,7 +2,6 @@
 import React, {useState, FormEvent} from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { v4 as uuidv4 } from 'uuid';
 
 import { useData } from "@/context/BoardContext";
 import { slugify } from "@/utils/slugify";
@@ -13,22 +12,30 @@ interface Props {
 }
 
 const NewBoardModal = ({ onClose }: Props) => {
-  const { addBoard } = useData();
+  const { addBoard, addColumns } = useData();
   const router = useRouter();
 
   // State to store new board data
   const [newBoard, setNewBoard] = useState({
-    id: uuidv4(),
     name: "",
-    columns: [{ id: uuidv4(), name: "", tasks: [] }],
+    columns: [{ name: "", tasks: [] }],
   });
   
   // Function to handle board submit
-  const handleSubmit =  (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    addBoard(newBoard);
-    onClose();
-    router.push(`/b/${newBoard.id}/${slugify(newBoard.name)}`);
+    try {
+      const createdBoard = await addBoard(newBoard);
+
+      if (createdBoard?.id && newBoard.columns.length > 0) {
+        await addColumns(createdBoard.id, newBoard.columns);
+      
+      }
+      onClose();
+      router.push(`/b/${createdBoard.id}/${slugify(createdBoard.name)}`); 
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // Function to handle board name change
@@ -46,7 +53,7 @@ const NewBoardModal = ({ onClose }: Props) => {
 
    // Function to add a column to the new board
    const addColumn = () => {
-    const newCol = { id: uuidv4(), name: "", tasks: [] };
+    const newCol = {id: Date.now(), name: "", tasks: [] };
     const columns = [...newBoard.columns, newCol];
     setNewBoard({ ...newBoard, columns });
   }
@@ -96,7 +103,7 @@ const NewBoardModal = ({ onClose }: Props) => {
           <div className="overflow-y-auto custom-scrollbar">
             {newBoard.columns.map((column, index) => (
               <div
-                key={column.id}
+                key={index}
                 className="flex mb-[0.75rem] gap-4 pe-1"
               >
                 <input

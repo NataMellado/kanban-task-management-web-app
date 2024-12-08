@@ -5,24 +5,20 @@ import { useData } from "@/context/BoardContext";
 import { slugify } from "@/utils/slugify";
 import NewBoardModal from "@/components/Modals/NewBoardModal";
 
+
 const HomePage = () => {
   const router = useRouter();
   const { boardData } = useData();
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
 
   // Use effect to redirect to the first board if there is one
   useEffect(() => {
     if (boardData.length > 0) {
       const firstBoard = boardData[0];
       router.replace(`/b/${firstBoard.id}/${slugify(firstBoard.name)}`);
-    } else {
-      setLoading(false);
     }
   }, [boardData, router]);
 
-  // If the page is loading don't show anything
-  if (loading) {return};
 
   // If there are no boards, show a message to create one
   if (boardData.length === 0) {

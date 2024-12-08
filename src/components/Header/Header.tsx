@@ -11,7 +11,8 @@ import DarkModeSwitcher from "@/components/DarkModeSwitcher/DarkModeSwitcher";
 const Header = () => {
   const { boardId } = useParams() as { boardId: string };
   const { getBoard } = useData();
-  const board = getBoard(boardId);
+  const board = getBoard(parseInt(boardId));
+
   const isAddTaskDisabled = !board?.columns || board?.columns.length === 0;
 
   return (

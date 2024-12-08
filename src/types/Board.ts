@@ -1,27 +1,34 @@
 export interface Board {
-  id: string;
+  id?: number;
   name: string;
   columns: Column[];
+  order?: number;
+  created_at?: string;
+  updated_at?: string;
 }
 export interface Column {
-  id: string;
+  id?: number;
   name: string;
   tasks: Task[];
+  order?: number;
+  created_at?: string;
+  updated_at?: string;
 }
 export interface Task {
-  id: string;
+  id: number;
   title: string;
   description: string;
-  status?: TaskStatus;
+  columnId: number;
   subtasks: Subtask[];
+  order?: number;
+  created_at?: string;
+  updated_at?: string;
 }
 export interface Subtask {
+  id: number;
   title: string;
   isCompleted: boolean;
-}
-
-export enum TaskStatus {
-  Todo = "Todo",
-  Doing = "Doing",
-  Done = "Done"
+  order?: number;
+  created_at?: string;
+  updated_at?: string;
 }
